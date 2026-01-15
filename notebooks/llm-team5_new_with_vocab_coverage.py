@@ -72,46 +72,6 @@ def _(mo):
     return (api_key,)
 
 
-@app.cell
-def _():
-    # llm = ChatOpenAI(
-    #     model="gpt-4o-mini",
-    #     temperature=0.1,
-    #     api_key=api_key.value
-    # )
-
-
-    # rewrite_prompt = PromptTemplate.from_template("""
-    # Your task:
-    # Rewrite the sentence for CEFR level (level).
-    # Keep the original meaning.
-
-    # Original:
-    # {sent}
-
-    # Output format: ONLY the simplified sentence
-    # """)
-
-    # rewrite_chain = rewrite_prompt | llm
-
-    # def simplify_sentence_with_simple_prompt(sentence: str, level: str) -> str:
-
-    #     result = rewrite_chain.invoke({
-    #         "sent": sentence
-    #     }).content.strip()
-
-    #     return result
-
-    # text = (
-    #     "Despite the fact that the weather was inclement, "
-    #     "the terrestrial journey proceeded as originally scheduled."
-    # )
-
-    # print("Original: ", text)
-    # print("A2:", simplify_sentence_with_simple_prompt(text, "A2"))
-    # print("B1:", simplify_sentence_with_simple_prompt(text, "B1"))
-    return
-
 
 @app.cell
 def _(
