@@ -866,5 +866,69 @@ def _(mo):
     return
 
 
+@app.cell
+def _(mo):
+    mo.md(r"""
+    Evaluation uses numeric CEFR levels
+
+    The evaluation converts both target levels and predicted levels into numbers, then computes RMSE.
+    So an RMSE > 1 means:
+
+    On average, your predicted CEFR level is more than one level away from the target.
+    For example:
+
+    Target A2 (1) but predicted B2 (3) → error = 2
+    Target B1 (2) but predicted C1 (4) → error = 2 These raise RMSE quickly.
+    Why this can happen for the fine‑tuned model:
+
+    It keeps outputs close to the original, so classifiers may label them as higher level.
+    It may not simplify enough, so outputs remain B2/C1 even when target is A2/B1.
+
+
+
+
+    Coverage (Validity)
+
+    Both systems have 200 outputs and 100% coverage.
+    This means the evaluation is complete and reliable.
+    CEFR Targeting (Difficulty Control)
+
+    Base model (results_base_seqtoseq.jsonl)
+
+    weighted_f1 = 0.4451 (better)
+    adj_accuracy = 0.910 (very strong)
+    rmse = 0.9274 (lower is better)
+    Interpretation: The base model matches CEFR levels more consistently.
+    Fine‑tuned model (results_finetuned_seqtoseq.jsonl)
+
+    weighted_f1 = 0.3159
+    adj_accuracy = 0.735
+    rmse = 1.3115
+    Interpretation: CEFR control is weaker than the base model, often off by one or more levels.
+    Meaning Preservation (Semantic Similarity)
+
+    Base model
+
+    meaningbert-orig = 0.6302
+    bertscore-orig = 0.8946
+    meaningbert-ref = 0.5774
+    bertscore-ref = 0.8807
+    Interpretation: Base model outputs are less similar to the original and the reference — it simplifies more aggressively (possibly too much).
+    Fine‑tuned model
+
+    meaningbert-orig = 0.9417
+    bertscore-orig = 0.9867
+    meaningbert-ref = 0.7967
+    bertscore-ref = 0.9349
+    Interpretation: Fine‑tuned outputs are very close to the original text; simplification is mild, but meaning is preserved strongly.
+    Trade‑off Summary
+
+    Base model: better CEFR accuracy, but lower meaning preservation.
+    Fine‑tuned model: better meaning preservation, but worse CEFR accuracy and likely under‑simplification.
+    return
+    """)
+    return
+
+
 if __name__ == "__main__":
     app.run()

@@ -66,7 +66,7 @@ def _(ChatOpenAI, PromptTemplate, api_key):
 
     rewrite_prompt = PromptTemplate.from_template("""
     Your task:
-    Rewrite the sentence for CEFR level (level).
+    Rewrite the sentence for CEFR level {level}.
     Keep the original meaning.
 
     Original:
@@ -80,7 +80,8 @@ def _(ChatOpenAI, PromptTemplate, api_key):
     def simplify_sentence_with_simple_prompt(sentence: str, level: str) -> str:
 
         result = rewrite_chain.invoke({
-            "sent": sentence
+            "sent": sentence,
+            "level": level
         }).content.strip()
 
         return result
@@ -517,44 +518,10 @@ def _(df):
 @app.cell
 def _(mo):
     mo.md(r"""
-    | modelname                                   | teamname  | num_instances | coverage_n | coverage_pct | weighted_f1 | adj_accuracy | rmse   | meaningbert-orig | bertscore-orig | meaningbert-ref | bertscore-ref |
-    |--------------------------------------------|-----------|---------------|------------|--------------|-------------|--------------|--------|------------------|----------------|------------------|---------------|
-    | results_simple_prompt.jsonl                | team_test | 200           | 200        | 100.0        | 0.4412      | 0.935        | 0.8718 | 0.8548           | 0.952          | 0.8419           | 0.9475        |
-    | results_llm_without_vocab_coverage.jsonl   | team_test | 200           | 200        | 100.0        | 0.477       | 0.935        | 0.9247 | 0.8682           | 0.9539         | 0.8383           | 0.9463        |
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    Coverage: 100.0% (all gold items were successfully evaluated)
-
-
-    Weighted F1: 0.477
-    → Moderate agreement with gold CEFR labels
-
-    Adjacent accuracy: 0.935
-    → 93.5% of predictions are at most one CEFR level away from the gold label
-
-    RMSE (CEFR distance): 0.9247
-    → Average prediction error is just under one CEFR level
-
-
-    ### Meaning preservation (vs. original text):
-
-    MeaningBERT: 0.8682
-
-    BERTScore (F1): 0.9539
-    → Strong semantic similarity to the original text
-
-
-    ### Meaning preservation (vs. reference simplification):
-
-    MeaningBERT: 0.8383
-
-    BERTScore (F1): 0.9463
-    → High alignment with human reference simplifications
+    | modelname                                   | teamname  | num_instances | coverage_n | coverage_pct | weighted_f1 | adj_accuracy | rmse  | meaningbert-orig | bertscore-orig | meaningbert-ref | bertscore-ref |
+    |--------------------------------------------|-----------|---------------|------------|---------------|-------------|--------------|-------|------------------|----------------|-----------------|---------------|
+    | results_simple_prompt.jsonl                | team_test | 200           | 200        | 100.0         | 0.5776      | 0.975        | 0.7176 | 0.8452           | 0.9483         | 0.8447          | 0.9502        |
+    | results_llm_without_vocab_coverage.jsonl   | team_test | 200           | 200        | 100.0         | 0.4770      | 0.935        | 0.9247 | 0.8682           | 0.9539         | 0.8383          | 0.9463        |
     """)
     return
 
