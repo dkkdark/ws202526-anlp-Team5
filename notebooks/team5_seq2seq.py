@@ -862,5 +862,16 @@ def _(
     return (json,)
 
 
+@app.cell
+def _(mo):
+    mo.md(r"""
+    | modelname                         | teamname | num_instances | coverage_n | coverage_pct | weighted_f1 | adj_accuracy | rmse   | meaningbert-orig | bertscore-orig | meaningbert-ref | bertscore-ref |
+    |----------------------------------|----------|---------------|------------|--------------|-------------|--------------|--------|------------------|----------------|------------------|---------------|
+    | results_base_seqtoseq.jsonl       | team5    | 200           | 200        | 100.0        | 0.4451      | 0.91         | 0.9274 | 0.6302           | 0.8946         | 0.5774           | 0.8807        |
+    | results_finetuned_seqtoseq.jsonl  | team5    | 200           | 200        | 100.0        | 0.3159      | 0.735        | 1.3115 | 0.9417           | 0.9867         | 0.7967           | 0.9349        |
+    """)
+    return
+
+
 if __name__ == "__main__":
     app.run()
