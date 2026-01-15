@@ -1,0 +1,2 @@
+modelname,teamname,num_instances,coverage_n,coverage_pct,weighted_f1,adj_accuracy,rmse,meaningbert-orig,bertscore-orig,meaningbert-ref,bertscore-ref
+results_simple_prompt.jsonl,team_test,200,200,100.0,0.4412,0.935,0.8718,0.8548,0.952,0.8419,0.9475

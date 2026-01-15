@@ -1,0 +1,2 @@
+modelname,teamname,num_instances,coverage_n,coverage_pct,weighted_f1,adj_accuracy,rmse,meaningbert-orig,bertscore-orig,meaningbert-ref,bertscore-ref
+results_llm_without_vocab_coverage.jsonl,team_test,200,200,100.0,0.477,0.935,0.9247,0.8682,0.9539,0.8383,0.9463
