@@ -442,13 +442,6 @@ def _(AutoModelForSeq2SeqLM, device_t5, mo, test_input, tokenizer, torch):
 
 
 @app.cell
-def _():
-    from huggingface_hub import login
-    login(token="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")
-    return
-
-
-@app.cell
 def _(AutoModelForSeq2SeqLM, AutoTokenizer, torch):
     if torch.cuda.is_available():
         device2 = torch.device("cuda")
