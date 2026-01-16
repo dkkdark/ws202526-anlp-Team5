@@ -1,0 +1,3 @@
+modelname,teamname,num_instances,coverage_n,coverage_pct,weighted_f1,adj_accuracy,rmse,meaningbert-orig,bertscore-orig,meaningbert-ref,bertscore-ref
+results_llm_gemini_2.5_flash_with_vocab_coverage_reduced_gold.jsonl,team_test,100,100,100.0,0.6699,0.96,0.7,0.9012,0.9604,0.8315,0.9485
+results_simple_prompt.jsonl,team_test,200,100,100.0,0.4422,0.96,0.8246,0.8479,0.956,0.8479,0.9504
